@@ -18,7 +18,7 @@ const RoomSchema = new SimpleSchema({
       type: 'hidden',
       label: false
     },
-    defautlValue: new Date()
+    defaultValue: new Date()
   }
 });
 

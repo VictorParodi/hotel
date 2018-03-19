@@ -6,8 +6,8 @@ SimpleSchema.extendOptions(['autoform']);
 const Members = new Mongo.Collection('memmbers');
 
 const MemberSchema = new SimpleSchema({
-  firstName = { type: String },
-  lastName = { type: String },
+  firstName: { type: String },
+  lastName: { type: String },
   member: { type: String },
   street: { type: String },
   city: { type: String },
