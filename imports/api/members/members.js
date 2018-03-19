@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema';
 
 SimpleSchema.extendOptions(['autoform']);
 
-const Members = new Mongo.Collection('memmbers');
+export const Members = new Mongo.Collection('members');
 
 const MemberSchema = new SimpleSchema({
   firstName: { type: String },
@@ -27,5 +27,3 @@ const MemberSchema = new SimpleSchema({
 });
 
 Members.attachSchema(MemberSchema);
-
-export default Members;
