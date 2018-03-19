@@ -2,17 +2,30 @@ import { Meteor } from 'meteor/meteor';
 import _ from 'lodash';
 import faker from 'faker';
 import { Members } from './../imports/api/members/members';
-import Rooms from './../imports/api/rooms/rooms';
+import { Rooms } from './../imports/api/rooms/rooms';
 
 Meteor.startup(() => {
   // code to run on server at startup
+
+  Meteor.publish('rooms.vacantRooms', () => {
+    return Rooms.find({
+      available: true
+    });
+  });
+
+  Meteor.publish('rooms.allRooms', () => {
+    return Rooms.find();
+  });
 
   Meteor.publish('members.allMembers', () => {
     return Members.find();
   });
 
   const numberMembers = Members.find({}).count();
-  console.log(numberMembers);
+  console.log('MEMBERS', numberMembers);
+
+  const numberRooms = Rooms.find().count();
+  console.log('ROOMS', numberRooms);
 
   if (!numberMembers) {
     _.times(20, () => {
@@ -42,6 +55,28 @@ Meteor.startup(() => {
       }
     
       Members.insert(newMember);
+    });
+  }
+
+  if (!numberRooms) {
+    _.times(25, (roomNumber) => {
+      roomNumber++;
+      const checkIn = faker.date.past();
+      const checkOut = faker.date.future();
+
+      let newRoom = {
+        roomNumber,
+        checkIn,
+        checkOut,
+        tenantID: 'No one',
+        available: true,
+        needCleaning: true,
+        createdAt: new Date()
+      }
+
+      Rooms.insert(newRoom);
+
+      return roomNumber;
     });
   }
 });

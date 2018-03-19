@@ -3,7 +3,7 @@ import SimpleSchema from 'simpl-schema';
 
 SimpleSchema.extendOptions(['autoform']);
 
-const Rooms = new Mongo.Collection('rooms');
+export const Rooms = new Mongo.Collection('rooms');
 
 const RoomSchema = new SimpleSchema({
   roomNumber: { type: Number },
@@ -23,5 +23,3 @@ const RoomSchema = new SimpleSchema({
 });
 
 Rooms.attachSchema(RoomSchema);
-
-export default Rooms;
