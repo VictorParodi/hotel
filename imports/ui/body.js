@@ -7,6 +7,8 @@ import './body.html';
 import './members.html';
 import './rooms.html';
 
+window.Members = Members;
+
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('members.allMembers');
   Meteor.subscribe('rooms.allRooms');
@@ -26,4 +28,8 @@ Template.rooms.helpers({
   rooms() {
     return Rooms.find();
   }
+});
+
+Template.members.onRendered(function() {
+  $('#modal1').modal();
 });
