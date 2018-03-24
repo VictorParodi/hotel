@@ -1,11 +1,33 @@
 <template name="members">
-  <ul>
-    {{#each members}}
-      {{> member}}
-    {{/each}}
-  </ul>
+  <div class="row">
+    <div class="col s12">
+      <a></a>
+    </div>
+  </div>
+  
+  {{#each members}}
+    {{> member}}
+  {{/each}}
 </template>
 
 <template name="member">
-  <li> {{firstName}} {{lastName}}</li>
+  <div class="col s6">
+    <div class="card">
+      <div class="card-image">
+        <img src="https://images.unsplash.com/photo-1482555670981-4de159d8553b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=fd9c7783d5a84ff9bbc48abf5d2bc7ce&auto=format&fit=crop&w=334&q=80">
+
+        <div class="card-title"> {{firstName}} {{lastName}} </div>
+      </div>
+
+      <div class="card-content">
+        <p> Member# {{member}} </p>
+        <p> {{city}}, {{state}} </p>
+      </div>
+
+      <div class="card-action">
+        <a href="#"> Last day: {{formatDate lastCheckout}} </a>
+        <a href="#"> No of nights: {{numberOfNights}} </a>
+      </div>
+    </div>
+  </div>
 </template>

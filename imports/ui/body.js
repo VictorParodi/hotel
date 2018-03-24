@@ -12,6 +12,10 @@ Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('rooms.allRooms');
 });
 
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('MMM Do YYYY');
+});
+
 Template.members.helpers({
   members() {
     return Members.find();
