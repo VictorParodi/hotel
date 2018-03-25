@@ -7,7 +7,10 @@ import './body.html';
 import './members.html';
 import './rooms.html';
 
+AutoForm.setDefaultTemplate('materialize');
+
 window.Members = Members;
+window.Rooms = Rooms;
 
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('members.allMembers');
@@ -30,6 +33,22 @@ Template.rooms.helpers({
   }
 });
 
+Template.room.helpers({
+  makeUniqueID() {
+    return this._id;
+  },
+
+  returnName(tenantID) {
+    const member = Members.findOne({ _id: tenantID });
+    console.log('------------------', member);
+    return `${member.firstName} ${member.lastName}`;
+  }
+});
+
 Template.members.onRendered(function() {
   $('#modal1').modal();
+});
+
+Template.rooms.onRendered(function() {
+  $('collapsible').collapsible();
 });

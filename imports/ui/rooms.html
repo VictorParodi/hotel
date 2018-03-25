@@ -1,20 +1,27 @@
 <template name="rooms">
-  <div class="collection">
+  <ul class="collapsible" data-collapsible="accordion">
     {{#each rooms}}
       {{> room}}
     {{/each}}
-  </div>
+  </ul>
 </template>
 
 <template name="room">
-  <a href="#!" class="collection item">
-    {{#if available}}
-      <span class="new badge" data-badge-caption=""> {{roomNumber}} </span>
-    {{else}}
-      <span class="new badge red" data-badge-caption=""> {{roomNumber}} </span>
-    {{/if}}
+  <li>
+    <div class="collapsible-header">
+        Available: {{#if available}} Yes {{else}} No {{/if}} <br/>
+        Tenant: {{returnName tenantID}}
 
-    Available: {{#if available}} Yes {{else}} No {{/if}} <br/>
-    Tenant: {{tenantID}} <br/><br/>
-  </a>
+        {{#if available}}
+          <span class="new badge" data-badge-caption=""> {{roomNumber}} </span>
+        {{else}}
+          <span class="new badge red" data-badge-caption=""> {{roomNumber}} </span>
+        {{/if}}
+    </div>
+
+    <div class="collapsible-body">
+      <h5> Change room status </h5>
+      {{> quickForm collection="Rooms" type="update" doc=this autosave=true id=makeUniqueID}}
+    </div>
+  </li>
 </template>
